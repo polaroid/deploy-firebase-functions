@@ -17,4 +17,4 @@ fi
 firebase deploy \
     -m "${GITHUB_REF} (${GITHUB_SHA})" \
     --project ${FIREBASE_PROJECT} \
-    --only functions
+    --only functions,hosting
