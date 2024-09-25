@@ -14,7 +14,22 @@ if [ -z "${FIREBASE_PROJECT}" ]; then
     exit 1
 fi
 
-firebase deploy \
-    -m "${GITHUB_REF} (${GITHUB_SHA})" \
-    --project ${FIREBASE_PROJECT} \
-    --only functions,hosting
+if [ -z "${DRY_RUN}" ]; then
+    echo "DRY_RUN is missing. Will try to deploy the build results."
+fi
+
+# Initialize the command
+CMD="firebase deploy"
+
+# Add parameters
+CMD="$CMD -m \"${GITHUB_REF} (${GITHUB_SHA})\""
+CMD="$CMD --project ${FIREBASE_PROJECT}"
+CMD="$CMD --only functions,hosting"
+
+# Conditionally add --dry-run
+if [ "$DRY_RUN" = "true" ]; then
+    CMD="$CMD --dry-run"
+fi
+
+# Execute the command
+eval $CMD
