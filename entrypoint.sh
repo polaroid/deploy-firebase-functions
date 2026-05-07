@@ -24,7 +24,7 @@ CMD="firebase deploy"
 # Add parameters
 CMD="$CMD -m \"${GITHUB_REF} (${GITHUB_SHA})\""
 CMD="$CMD --project ${FIREBASE_PROJECT}"
-CMD="$CMD --only functions,hosting"
+CMD="$CMD --only functions,hosting,firestore,storage"
 
 # Conditionally add --dry-run
 if [ "$DRY_RUN" = "true" ]; then
