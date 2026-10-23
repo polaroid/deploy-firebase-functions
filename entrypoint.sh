@@ -4,8 +4,8 @@ FUNCTIONS_DIR=${FUNCTIONS_DIR:-functions}
 
 cd $FUNCTIONS_DIR; npm install
 
-if [ -z "${FIREBASE_TOKEN}" ]; then
-    echo "FIREBASE_TOKEN is missing"
+if [ -z "${FIREBASE_TOKEN}" ] && [ -z "${GOOGLE_APPLICATION_CREDENTIALS}" ]; then
+    echo "FIREBASE_TOKEN or GOOGLE_APPLICATION_CREDENTIALS must be provided"
     exit 1
 fi
 
